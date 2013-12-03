@@ -5,7 +5,7 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'http://localhost:8080';
+config.uMobileServerUrl = 'https://my.manchester.ac.uk';
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '/uPortal';
@@ -14,7 +14,7 @@ config.uMobileServerContext = '/uPortal';
 // mockLogin, localLogin or casLogin.
 config.loginFn = 'casLogin';
 config.encryptionKey = 'umobile';
-config.casServerUrl = 'http://localhost:8080';
+config.casServerUrl = 'https://login.manchester.ac.uk';
 
 // LOCAL STORAGE.
 config.storageFn = 'local';
@@ -26,26 +26,16 @@ config.sessionTimeout = '600000';
 // LOCALLY HOSTED ICONS
 // For uMobile modules. Keyed by module fname.
 config.nativeIcons = {
-	athletics: 'athletics.png',
-	announcements: 'bullhorn.png',
-	calendar: 'calendar.png',
-	'computer-labs': 'computer_lab.png',
-	courses: 'courses.png',
-	dining: 'dining.png',
-	directory: 'directory.png',
-	laundry: 'laundry.png',
-	library: 'library.png',
-	map: 'map.png',
-	news: 'feed.png',
-	presentations: 'opencast.png',
-	search: 'search.png',
-	stats: 'stats.png',
-	transit: 'transit.png',
-	twitter: 'twitter.png',
-	videos: 'youtube.png',
-	weather: 'weather.png',
-	info: 'default-icon.png'
+        timetable: 'calendar.png'
 };
+
+config.moduleList = [
+    'contacts', 'timetable', 'man-portlet-calendar', 'my-news',
+    'hot-topic', 'job-vacancies', 'careers-events', 'library-search', 'find-pc',
+    'open-days'
+];
+    
+
 
 // SUPPORTED MODULES
 config.nativeModules = {
@@ -53,4 +43,5 @@ config.nativeModules = {
 	//map: 'modules/map.html',
 	//calendar: 'modules/calendar.html',
 	//courses: 'modules/courses.html'
+        'find-pc': 'modules/findpc.html'
 };

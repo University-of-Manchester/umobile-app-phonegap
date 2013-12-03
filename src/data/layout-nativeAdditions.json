@@ -1,0 +1,36 @@
+{
+    "portlets": [
+            {
+                    "fname": "find-pc",
+                    "title": "Find a PC",
+                    "url": "modules/findpc.html",
+                    "description": "find a pc cluster with free pcs",
+                    "newItemCount": "0",
+                    "iconUrl": "images/icons/feed.png"
+            },
+            {
+                    "fname": "open-days",
+                    "title": "Open Days",
+                    "url": "https://my.manchester.ac.uk/uPortal/p/open-days/detached",
+                    "description": "Open Days",
+                    "newItemCount": "0",
+                    "iconUrl": "images/icons/feed.png"
+            },
+            {
+                    "fname": "emergency",
+                    "title": "Emergency",
+                    "url": "modules/emergency.html",
+                    "description": "Emergency Information",
+                    "newItemCount": "0",
+                    "iconUrl": "images/icons/feed.png"
+            },
+            {
+                    "fname": "map",
+                    "title": "Campus Map",
+                    "url": "modules/map.html",
+                    "description": "Campus Map",
+                    "newItemCount": "0",
+                    "iconUrl": "images/icons/map.png"
+            }
+    ]
+}

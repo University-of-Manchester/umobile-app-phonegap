@@ -111,6 +111,8 @@ var umobile = {
 		// Define.
 		var modules, folders, headers;
 
+                var native = config.nativeModules;
+                
 		// Initialize.
 		modules = [];
 		folders = (data && !_.isEmpty(data)) ? data.layout.folders : {};
@@ -132,6 +134,7 @@ var umobile = {
 			_.each(portlets, function (portlet, idx) {
 				portlet.id = portlet.fname;
 
+if (config['moduleList'].length === 0 || $.inArray(portlet.id, config.moduleList) > -1) {
 				// Parse the config.nativeIcons object for a property
 				// that matches the portlet.fname. If one is found, set
 				// the icon url to leverage a locally stored icon. If a
@@ -140,7 +143,8 @@ var umobile = {
 				if (config.nativeIcons[portlet.fname]) {
 					portlet.iconUrl = 'images/icons/' + config.nativeIcons[portlet.fname];
 				} else {
-					portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
+					//portlet.iconUrl = config.uPortalServerUrl + portlet.iconUrl;
+                                        portlet.iconUrl = config.uMobileServerUrl + portlet.iconUrl;
 				}
 
 				// Parse the config.nativeModules object for a property that
@@ -148,9 +152,10 @@ var umobile = {
 				// portlet is natively supported. Set the portlet url to a local
 				// implementation (i.e., map.html). Otherwise, set the portlet url
 				// to an implementation located on the server.
-				if (config.nativeModules[portlet.fname]) {
-					portlet.url = config.nativeModules[portlet.fname];
+				if (native[portlet.fname]) {
+					portlet.url = native[portlet.fname];
 					portlet.isNative = true;
+                                        native.splice(portlet.fname, 1); //  remove from the list
 				} else {
 					portlet.url = config.uMobileServerUrl + portlet.url;
 					portlet.isNative = false;
@@ -277,13 +282,29 @@ var umobile = {
 			// Populate the collection with modules.
 			modules = umobile.buildModuleArray(data);
 			umobile.app.moduleCollection.reset(modules);
-			umobile.app.moduleCollection.save();
+                                        // add native additions to folder list.
+                      
 
+                        $.ajax({
+                                url: 'data/layout-nativeAdditions.json',
+                                dataType: 'json',
+                                type: 'GET'
+                        }).done(function(additions, textStatus, jqXHR) {
+                            
+                            umobile.app.moduleCollection.add(additions.portlets);    
+                        }).always(function(data,status,error) {
+                            
+			umobile.app.moduleCollection.save();
+                            // Redirect user to dashboard.
+                            umobile.app.router.navigate('dashboard', {trigger: true});
+                        });
+
+//                        umobile.app.moduleCollection.save();
 			// Update time in the Session Tracker.
 			umobile.session.SessionTracker.set(umobile.app.stateModel.get('lastSessionAccess'));
 
-			// Redirect user to dashboard.
-			umobile.app.router.navigate('dashboard', {trigger: true});
+//			// Redirect user to dashboard.
+//			umobile.app.router.navigate('dashboard', {trigger: true});
 		}, this));
 
 		// Subscribe to 'session.failure' event.
@@ -325,10 +346,6 @@ var umobile = {
 	**/
 	initialize: function () {
 		'use strict';
-		// Listen to onDeviceReady event.
-		document.addEventListener('deviceready', umobile.onDeviceReady, false);
-		if (config.loginFn === 'mockLogin') {
 			umobile.onDeviceReady();
 		}
-	}
 };
