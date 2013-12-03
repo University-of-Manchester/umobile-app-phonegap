@@ -169,6 +169,7 @@ if (config['moduleList'].length === 0 || $.inArray(portlet.id, config.moduleList
 				portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
 				modules.push(new umobile.model.Module(portlet));
+}
 			}, this);
 		}, this);
 
