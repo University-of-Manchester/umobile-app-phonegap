@@ -1,0 +1,51 @@
+[submodule "plugins/cordova-plugin-inappbrowser"]
+	path = plugins/cordova-plugin-inappbrowser
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
+[submodule "plugins/cordova-plugin-splashscreen"]
+	path = plugins/cordova-plugin-splashscreen
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git
+[submodule "plugins/cordova-plugin-globalization"]
+	path = plugins/cordova-plugin-globalization
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git
+[submodule "plugins/cordova-plugin-contacts"]
+	path = plugins/cordova-plugin-contacts
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-contacts.git
+[submodule "plugins/cordova-plugin-dialogs"]
+	path = plugins/cordova-plugin-dialogs
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git
+[submodule "plugins/cordova-plugin-vibration"]
+	path = plugins/cordova-plugin-vibration
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git
+[submodule "plugins/cordova-plugin-file"]
+	path = plugins/cordova-plugin-file
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-file.git
+[submodule "plugins/cordova-plugin-camera"]
+	path = plugins/cordova-plugin-camera
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-camera.git
+[submodule "plugins/cordova-plugin-media-capture"]
+	path = plugins/cordova-plugin-media-capture
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-media-capture.git
+[submodule "plugins/cordova-plugin-media"]
+	path = plugins/cordova-plugin-media
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-media.git
+[submodule "plugins/cordova-plugin-device-motion"]
+	path = plugins/cordova-plugin-device-motion
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git
+[submodule "plugins/cordova-plugin-device-orientation"]
+	path = plugins/cordova-plugin-device-orientation
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git
+[submodule "plugins/cordova-plugin-geolocation"]
+	path = plugins/cordova-plugin-geolocation
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git
+[submodule "plugins/cordova-plugin-network-information"]
+	path = plugins/cordova-plugin-network-information
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git
+[submodule "plugins/cordova-plugin-battery-status"]
+	path = plugins/cordova-plugin-battery-status
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git
+[submodule "plugins/cordova-plugin-device"]
+	path = plugins/cordova-plugin-device
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
+[submodule "plugins/cordova-plugin-file-transfer"]
+	path = plugins/cordova-plugin-file-transfer
+	url = https://git-wip-us.apache.org/repos/asf/cordova-plugin-file-transfer.git
