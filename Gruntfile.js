@@ -246,6 +246,24 @@ module.exports = function(grunt) {
                 cordova: '.cordova',
                 path: 'phonegap',
                 plugins: [
+                    '../plugins/cordova-plugin-inappbrowser',
+                    '../plugins/cordova-plugin-splashscreen',
+                    '../plugins/cordova-plugin-globalization',
+                    '../plugins/cordova-plugin-contacts',
+                    '../plugins/cordova-plugin-dialogs',
+                    '../plugins/cordova-plugin-vibration',
+                    '../plugins/cordova-plugin-file',
+                    '../plugins/cordova-plugin-file-transfer',
+                    '../plugins/cordova-plugin-camera',
+                    '../plugins/cordova-plugin-media-capture',
+                    '../plugins/cordova-plugin-media',
+                    '../plugins/cordova-plugin-device-motion',
+                    '../plugins/cordova-plugin-device-orientation',
+                    '../plugins/cordova-plugin-geolocation',
+                    '../plugins/cordova-plugin-network-information',
+                    '../plugins/cordova-plugin-battery-status',
+                    '../plugins/cordova-plugin-device'
+/*                    
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git',
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git',
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git',
@@ -263,6 +281,7 @@ module.exports = function(grunt) {
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git',
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git',
                     'https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git'
+*/
                 ],
                 platforms: config.platforms,
                 maxBuffer: 400, // You may need to raise this for iOS.
@@ -355,7 +374,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('phonegap.run', [
         'prod',
-        //'phonegap.build',
+        'phonegap.build',
         'phonegap:run'
     ]);
 

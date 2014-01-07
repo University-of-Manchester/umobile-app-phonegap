@@ -134,7 +134,7 @@ var umobile = {
 			_.each(portlets, function (portlet, idx) {
 				portlet.id = portlet.fname;
 
-if (config['moduleList'].length === 0 || $.inArray(portlet.id, config.moduleList) > -1) {
+if (config.moduleList.length === 0 || $.inArray(portlet.id, config.moduleList) > -1) {
 				// Parse the config.nativeIcons object for a property
 				// that matches the portlet.fname. If one is found, set
 				// the icon url to leverage a locally stored icon. If a
@@ -169,7 +169,7 @@ if (config['moduleList'].length === 0 || $.inArray(portlet.id, config.moduleList
 				portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
 				modules.push(new umobile.model.Module(portlet));
-}
+                            }
 			}, this);
 		}, this);
 
@@ -292,7 +292,7 @@ if (config['moduleList'].length === 0 || $.inArray(portlet.id, config.moduleList
                                 type: 'GET'
                         }).done(function(additions, textStatus, jqXHR) {
                             
-                            umobile.app.moduleCollection.add(additions.portlets);    
+                            umobile.app.moduleCollection.add(additions.portlets);
                         }).always(function(data,status,error) {
                             
 			umobile.app.moduleCollection.save();
