@@ -2,8 +2,8 @@
 	"port": 5000,
 	"environment": "web",
         "platforms": [ "ios", "android" ],
-	"auth": "mock",
-	"mode": "dev",
+	"auth": "cas",
+	"mode": "prod",
 	"less": {
 		"dest": "./src/css",
 		"src": "./src/less",
