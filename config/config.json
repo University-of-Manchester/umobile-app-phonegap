@@ -1,7 +1,7 @@
 {
 	"port": 5000,
 	"environment": "web",
-        "platforms": [ "ios", "android" ],
+        "platforms": [ "android", "ios" ],
 	"auth": "cas",
 	"mode": "prod",
 	"less": {

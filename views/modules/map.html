@@ -10,20 +10,27 @@
 		<link type="text/css" rel="stylesheet" href="../css/module.css"/>
 
 		<!--JavaScript Dependencies-->
+                {{#dev}}
 		<script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
+		{{/dev}}
+		{{^dev}}
+		<script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
+		{{/dev}}
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 	</head>
-	<body class="um-module" >
+        
+	<body class="um-module" style="height: 100%;" >
 		<!--
 		| =====================
 		| Map View
 		| =====================
 		-->
-		<div id="map" class="um-map" >
+		<div id="map" class="um-map" style="height:100%;" >
 			<div id="mapCanvas" class="um-map-canvas"></div>
 		</div>
 
 		<!--JavaScript Source Files-->
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function () {
 				var options, map, minZoom, maxZoom;

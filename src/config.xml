@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="uk.ac.manchester.umobile" version="1.0.0">
     <name>MyManchester</name>
-    <description>Cordova Application</description>
-    <author email="info@com.coolappz" href="http://www.coolappz.com">mfgsscw2</author>
+    <description>My Manchester application</description>
+    <author email="christopher.white@manchester.ac.uk" href="mailto:christopher.white@manchester.ac.uk">Chris White</author>
     <access origin="*"/>
+    <access origin="https://*.googleapis.com/*"/>
+    <access origin="https://*.gstatic.com/*"/>
     <access origin="https://*.manchester.ac.uk/*"/>
     <preference name="fullscreen" value="true"/>
     <preference name="webviewbounce" value="true"/>
