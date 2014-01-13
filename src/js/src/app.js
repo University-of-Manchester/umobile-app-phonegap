@@ -166,7 +166,7 @@ if (config.moduleList.length === 0 || $.inArray(portlet.id, config.moduleList) >
 
 				// Truncate portlet title.
 				portlet.fullTitle = portlet.title;
-				portlet.title = umobile.utility.Utils.truncate(portlet.title);
+//				portlet.title = umobile.utility.Utils.truncate(portlet.title);
 
 				modules.push(new umobile.model.Module(portlet));
                             }
