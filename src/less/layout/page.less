@@ -2,26 +2,35 @@
 // Page
 // --------------------------------------------------
 .um-page {
-	.um-header {}
+    .um-header {
+        position: fixed;
+        width: 100%;
+        margin-left: -20px;
+        margin-right: -20px;
+        z-index: 99;
+    }
 
-	.um-main {
-		.um-expand;
-		position: relative;
+    .um-main {
 
-		.um-content {
-			.um-view {
-				padding: 0 0 0 0;
-			}
-		}
+        .um-expand;
+        position: fixed;
+        width: 100%;
+        padding-top: 50px;
 
-		.um-content-loader {
-			.um-loader;
-		}
-	}
+            .um-content {
+            .um-view {
+                padding: 0 0 0 0;
+            }
+        }
 
-	.um-footer {
-		.um-expand;
-		display: none;
-		padding: 10px;
-	}
+        .um-content-loader {
+            .um-loader;
+        }
+    }
+
+    .um-footer {
+        .um-expand;
+        display: none;
+        padding: 10px;
+    }
 }
