@@ -35,11 +35,26 @@
 			$(document).ready(function () {
 				var options, map, minZoom, maxZoom;
                                 
+                                var location = {
+                                    lat: 53.4685527268,
+                                    lng: -2.233056859149997,
+                                    title: "University Campus",
+                                    mark: false
+                                };
+                                if (localStorage.mapLocation != null) {
+                                    var mapLocation = localStorage.mapLocation.split(",");
+                                    localStorage.mapLocation = null;
+                                    location.lat = mapLocation[0];
+                                    location.lng = mapLocation[1];
+                                    location.title = mapLocation[2];
+                                    location.mark = true;
+                                }
+                                
                                 minZoom = 13;
                                 maxZoom = 17;
                                 
 				options = {
-					center: new google.maps.LatLng(53.4685527268, -2.233056859149997),
+					center: new google.maps.LatLng(location.lat, location.lng),
 					zoom: maxZoom,
                                         maxZoom: maxZoom,
                                         minZoom: minZoom,
@@ -97,7 +112,7 @@
                                 navigator.geolocation.getCurrentPosition(function(position) {
                                     
                                     var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-                                    map.setCenter(location);
+                                    if (!location.mark) map.setCenter(location);
                                     var marker = new google.maps.Marker({
                                         position: location,
                                         map: map,
@@ -105,6 +120,16 @@
                                     });
                                     
                                 });
+                                
+                                if (location.mark) {
+                                    var location = new google.maps.LatLng(location.lat, location.lng); 
+                                    map.setCenter(location);
+                                    var marker = new google.maps.Marker({
+                                        position: location,
+                                        map: map,
+                                        title: location.title
+                                    });
+                                }
                                 
 			});
 

@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
 
+                
 		<!--CSS Dependencies-->
 		<link type="text/css" rel="stylesheet" href="../css/module.css">
 	<head>
@@ -15,9 +16,114 @@
 		| Courses View
 		| =====================
 		-->
-		<iframe id="pcs" src="http://www.itservices.manchester.ac.uk/clusteravailability/avail.php?html">
-			
+
+                
+                <div class="list-group">
                     
-		</iframe>
+                </div>
+                
+                <script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
+                <script type="text/javascript">
+                    
+                    (function($) {
+                        
+                        
+                        $(function() {
+                            var location = {
+                                    lat: 53.4685527268,
+                                    lng: -2.233056859149997
+                                };
+                                
+                                /** Converts numeric degrees to radians */
+                            if (typeof(Number.prototype.toRad) === "undefined") {
+                              Number.prototype.toRad = function() {
+                                return this * Math.PI / 180;
+                              }
+                            }
+                                
+                            function calcDistanceTo(lat, lng) {
+                                var lat1 = location.lat.toRad(),
+                                    lat2 = lat.toRad(),
+                                    lon1 = location.lng.toRad(),
+                                    lon2 = lng.toRad();
+                                
+                                var R = 6371000; // meters
+                                var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + 
+                                                  Math.cos(lat1)*Math.cos(lat2) *
+                                                  Math.cos(lon2-lon1)) * R;
+                                
+                                return Math.round(d);
+                            }
+                            
+                            
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                console.log(position.coords.longitude);
+                                console.log(position.coords.latitude);
+                                location.lat = position.coords.latitude;
+                                location.lng = position.coords.longitude;
+                                
+                            });
+                            
+                            $.ajax({
+                                url: 'http://www.itservices.manchester.ac.uk/clusteravailability/avail.php',
+                                dataType: 'XML'
+                            }).done(function(data) {
+                                console.log(data);
+                                var $XML = $(data);
+                                var listGroup  = $("div.list-group");
+                                
+                                $XML.find("data PLPlace").each(function(index, place) {
+                                    if ($(this).find("open").text() === "true") {
+                                        var pat = /([0-9]+) seats taken, ([0-9]+) seats available/i;
+                                        var matched = pat.exec($(this).find("availability").text());
+                                        var taken = "?", avail = "?", total = "?"
+                                        if (matched !== null && matched.length === 3) {
+                                            taken = matched[1];
+                                            avail = matched[2];
+                                            total = parseInt(taken) + parseInt(avail);
+                                        } 
+                                        var lng = parseFloat($(this).find("longitude").text());
+                                        var lat = parseFloat($(this).find("latitude").text());
+                                        
+//                                        var distance = Math.sqrt(Math.pow(Math.abs(location.lng - lng),2) + Math.pow(Math.abs(location.lat - lat),2));
+                                        var distance = calcDistanceTo(lat, lng);
+                                        
+                                        var item = $("<a/>", {href:"map.html", avail: avail, distance: distance, lng:lng, lat:lat ,"class": "list-group-item"})
+                                            .append($("<span/>", {"class":"badge"}).append(avail + "/"+total))
+                                            .append($("<h4/>").append($(this).find("locationName").text()+" ").append($("<small/>").append("(&#8776;"+distance+"mtr)")))
+                                            .append($("<p/>").append($(this).find("name").text()))
+
+                                        var group = $(".list-group-item",listGroup)
+                                                    .filter(function() {
+                                                        return  $(this).attr("distance") <= distance;
+                                                    });
+                                        if (group.length === 0) {
+                                            listGroup.append(item);
+                                        } else {
+                                            group.last().after(item);
+                                        }
+                                        
+                                        
+                                    }
+                                });
+                                
+                                $("div.list-group").on("click tap", "a.list-group-item", function() {
+                                    var lng = $(this).attr("lng");
+                                    var lat = $(this).attr("lat");
+                                    var title = $(this).find("h4").text();
+
+                                    localStorage.mapLocation = lat+","+lng+","+title;
+//                                    var url = 'map.html';
+//                                    window.location = url;
+                                });
+                            }).fail(function(ret) {
+                                console.log(ret);
+                            });
+                            
+                        });
+                    })(jQuery);
+                    
+                    
+                </script>
 	</body>
 </html>

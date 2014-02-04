@@ -69,6 +69,42 @@
 		**/
 		renderFrame: function () {
 			var frame = this.loc('frame').show();
+                        
+                        // START OF FRAME SIZING LOGIC
+                        // frame size == full screen... minus header and footer.
+                        // IS THIS A NASTY HACK ? -- I think this should be implemented somewhere else .
+                        function resizeElement(toSize, parentSize) {
+                            var toHeight = parentSize - Math.max($(toSize).outerHeight(true) - $(toSize).innerHeight(), 0);
+                            $(toSize).siblings().filter(':visible').filter(function() {return $(this).css('position') !== 'fixed';}).each(
+                                function () {
+                                    toHeight -= $(this).outerHeight(true);
+                                }
+                            );
+                            $(toSize).height(toHeight);
+                        }
+                        var resizeAction = null;
+                        $(window).on({
+                            'resize':function () {
+                                
+                                window.clearTimeout(resizeAction);
+                                resizeAction = window.setTimeout(function() {
+                                    var $parents = $(frame).parents();
+                                    var parentSize = $(window).height();
+                                    $parents.each(function() {
+                                        resizeElement($(this), parentSize);
+                                        parentSize = $(this).innerHeight();
+                                    });
+                                    resizeElement($(frame), parentSize);
+                                    console.log('Parent Height: '+parentSize);
+                                }, 500);
+
+                            }
+                        });
+
+                    $(window).trigger('resize');
+                   // END OF FRAME SIZING LOGIC
+
+
 		},
 
 		/**

@@ -5,8 +5,10 @@
     <author email="christopher.white@manchester.ac.uk" href="mailto:christopher.white@manchester.ac.uk">Chris White</author>
     <access origin="*"/>
     <access origin="https://*.googleapis.com/*"/>
+    <access origin="https://maps.google.com/*"/>
     <access origin="https://*.gstatic.com/*"/>
     <access origin="https://*.manchester.ac.uk/*"/>
+    <access origin="http://*.manchester.ac.uk/*"/>
     <preference name="fullscreen" value="true"/>
     <preference name="webviewbounce" value="true"/>
     <content src="index.html"/>
