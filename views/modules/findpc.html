@@ -98,7 +98,7 @@
                                                         return  $(this).attr("distance") <= distance;
                                                     });
                                         if (group.length === 0) {
-                                            listGroup.append(item);
+                                            listGroup.prepend(item);
                                         } else {
                                             group.last().after(item);
                                         }
