@@ -29,5 +29,5 @@
 		"prefix": "/css",
 		"debug": true
 	},
-	"external": "../www"
+	"plugins": []
 }
