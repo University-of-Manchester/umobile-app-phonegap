@@ -1,8 +1,15 @@
 {
 	"port": 5000,
 	"environment": "web",
-        "platforms": [ "ios", "android" ],
-        "plugins" : [
+	"auth": "mock",
+	"mode": "dev",
+	"less": {
+		"dest": "./src/css",
+		"src": "./src/less",
+		"prefix": "/css",
+		"debug": true
+	},
+	 "plugins" : [
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git",
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-globalization.git",
@@ -20,14 +27,5 @@
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-network-information.git",
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-battery-status.git",
                     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git"
-        ],
-	"auth": "mock",
-	"mode": "dev",
-	"less": {
-		"dest": "./src/css",
-		"src": "./src/less",
-		"prefix": "/css",
-		"debug": true
-	},
-	"plugins": []
+        ]
 }
