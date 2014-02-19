@@ -1,138 +1,71 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Map</title>
+    <head>
+        <title>Map</title>
 
 
-		<meta charset="utf-8"/>
+        <meta charset="utf-8"/>
 
-		<!--CSS Dependencies-->
-		<link type="text/css" rel="stylesheet" href="../css/module.css"/>
+        <!--CSS Dependencies-->
+        <link type="text/css" rel="stylesheet" href="../css/module.css"/>
 
-		<!--JavaScript Dependencies-->
-                {{#dev}}
-		<script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
-		{{/dev}}
-		{{^dev}}
-		<script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
-		{{/dev}}
-                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-	</head>
+        <!--JavaScript Dependencies-->
+        {{#dev}}
+        <script type="text/javascript" src="../js/lib/jquery/jquery.js"></script>
+        {{/dev}}
+        {{^dev}}
+        <script type="text/javascript" src="../js/lib/jquery/jquery.min.js"></script>
+        {{/dev}}
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    </head>
+
+    <body class="um-module" style="height: 100%;" >
         
-	<body class="um-module" style="height: 100%;" >
-		<!--
-		| =====================
-		| Map View
-		| =====================
-		-->
-		<div id="map" class="um-map" style="height:100%;" >
-			<div id="mapCanvas" class="um-map-canvas"></div>
-		</div>
+            <div id="controls" style="font-size: larger; line-height: 2em; background-color: #FFFFFF; border: 1px solid black;">
+                
+                <a href="javascript:;" style="margin-left: 5px" class="um-map-search"><span class="glyphicon glyphicon-search"></span> Search</a>
+                <a href="javascript:;" style="margin-left: 10px; margin-right: 10px;" class="um-map-whereami"><span class="glyphicon glyphicon-map-marker"></span> Where am I</a>
+                <a href="javascript:;" style="margin-right: 5px;" class="um-map-busses "><span class="glyphicon glyphicon-road"></span> 147 Tracker</a>
+            </div>
+        <!--
+        | =====================
+        | Map View
+        | =====================
+        -->
+        <div id="map" class="um-map" >
+            <div id="mapCanvas" class="um-map-canvas"></div>
+            
+        </div>
 
-		<!--JavaScript Source Files-->
-		
-		<script type="text/javascript">
-			$(document).ready(function () {
-				var options, map, minZoom, maxZoom;
-                                
-                                var location = {
-                                    lat: 53.4685527268,
-                                    lng: -2.233056859149997,
-                                    title: "University Campus",
-                                    mark: false
-                                };
-                                if (localStorage.mapLocation != null) {
-                                    var mapLocation = localStorage.mapLocation.split(",");
-                                    localStorage.mapLocation = null;
-                                    location.lat = mapLocation[0];
-                                    location.lng = mapLocation[1];
-                                    location.title = mapLocation[2];
-                                    location.mark = true;
-                                }
-                                
-                                minZoom = 13;
-                                maxZoom = 17;
-                                
-				options = {
-					center: new google.maps.LatLng(location.lat, location.lng),
-					zoom: maxZoom,
-                                        maxZoom: maxZoom,
-                                        minZoom: minZoom,
-					mapTypeId: "UoM",
-                                        zoomControl: false,
-                                        mapTypeControl: false,
-                                        disableDefaultUI: true
-				};
-				map = new google.maps.Map(document.getElementById('mapCanvas'), options);
 
-                                var mapBounds = new google.maps.LatLngBounds(
-                                        new google.maps.LatLng(53.4593564536, -2.248669),
-                                        new google.maps.LatLng(53.477749, -2.2174447183)    
-                                );
-                                
-                                var maptiler = new google.maps.ImageMapType({
-                                    getTileUrl: function(coord, zoom) { 
-                                        var proj = map.getProjection();
-                                        var tileSize = 256 / Math.pow(2,zoom);
-                                        var tileBounds = new google.maps.LatLngBounds(
-                                            proj.fromPointToLatLng(new google.maps.Point(coord.x*tileSize, (coord.y+1)*tileSize)),
-                                            proj.fromPointToLatLng(new google.maps.Point((coord.x+1)*tileSize, coord.y*tileSize))
-                                        );
-                                        //if (mapBounds.intersects(tileBounds) && (zoom >= minZoom) && (zoom <= maxZoom)) {
-                                        if (tileBounds.intersects(mapBounds) && (zoom >= minZoom) && (zoom <= maxZoom)) {
-                                        
-                                            return  "../data/tiles/" + zoom + "/" + coord.x + "/" + (Math.pow(2,zoom)-coord.y-1) + ".png";
-                                        } else
-                                            return "../data/tiles/blank.png";
-                                    },
-                                    tileSize: new google.maps.Size(256, 256),
-                                    isPng: true,
-                                    maxZoom: maxZoom,
-                                    minZoom: minZoom,
-                                    name: "UoM"
-                                });
-                                
-                                map.mapTypes.set("UoM", maptiler);
-                                 //map.overlayMapTypes.insertAt(0, maptiler);
-                                
-                                
-                                var lastValidCenter = mapBounds.getCenter();
+        <!--JavaScript Source Files-->
 
-                                google.maps.event.addListener(map, 'center_changed', function() {
-                                    var gmapCenter = map.getCenter();
-                                    if (mapBounds.contains(gmapCenter)) {
-                                        // still within valid bounds, so save the last valid position
-                                        lastValidCenter = gmapCenter;
-                                        return; 
-                                    }
-                                    // not valid anymore => return to last valid position
-                                    map.setCenter(lastValidCenter);
-                                });
-                                
-                                navigator.geolocation.getCurrentPosition(function(position) {
-                                    
-                                    var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
-                                    if (!location.mark) map.setCenter(location);
-                                    var marker = new google.maps.Marker({
-                                        position: location,
-                                        map: map,
-                                        title: 'You are here'
-                                    });
-                                    
-                                });
-                                
-                                if (location.mark) {
-                                    var location = new google.maps.LatLng(location.lat, location.lng); 
-                                    map.setCenter(location);
-                                    var marker = new google.maps.Marker({
-                                        position: location,
-                                        map: map,
-                                        title: location.title
-                                    });
-                                }
-                                
-			});
-
-		</script>
-	</body>
+        <script type="text/javascript" src="../js/modules/bustracker.js"></script>
+        <script type="text/javascript" src="../js/modules/map.js"></script>
+        <script type="text/javascript">
+            (function ($) {
+                $(function() {
+                    
+                    BUSTRACKER.init(CAMPUS_MAP.map);
+                    var running = false;
+                    $(".um-map-busses").on("click tap", function() {
+                        if (running) {
+                            BUSTRACKER.stop();
+                            running = false;
+                        } else {
+                            BUSTRACKER.start();
+                            running = true;
+                        }
+                    });
+                    
+                    $(".um-map-whereami").on("click tap", function() {
+                        CAMPUS_MAP.whereami();
+                    });
+                    
+                    CAMPUS_MAP.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($("#controls").get(0));                    
+                    
+                });
+            })(jQuery);
+        </script>
+    </body>
 </html>
