@@ -74,6 +74,7 @@ config.getPublicDirectory = function () {
 };
 
 config.getOptionsForLess = function() {
+    'use strict';
 	var options = {
 		compress: config.isDevelopment() ? false : true,
 		cleancss: config.isDevelopment() ? false : true,

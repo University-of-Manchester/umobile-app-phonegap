@@ -7,10 +7,11 @@ var nconf = require('nconf'),
 // Grunt.
 module.exports = function (grunt) {
 	'use strict';
-
+        var pkg = grunt.file.readJSON('package.json');
+        
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
-
+		
+                pkg: pkg,
 		phonegap: {
 			config: {
 			 	root: 'www',
@@ -18,11 +19,12 @@ module.exports = function (grunt) {
 				cordova: '.cordova',
 				path: 'phonegap',
 				plugins: config.plugins,
-				platforms: function() {
-					var platformsUsed = [];
-					platformsUsed[0] = config.getCordova();
-					return platformsUsed;
-				},
+                                platforms: ['ios', 'android'],
+//				platforms: function() {
+//					var platformsUsed = [];
+//					platformsUsed[0] = config.getCordova();
+//					return platformsUsed;
+//				},
 				
 				maxBuffer: 500, // You may need to raise this for iOS.
 				verbose: true,
@@ -248,6 +250,7 @@ module.exports = function (grunt) {
 		}
 	});
 
+        
 	// Load plugins/tasks.
 	grunt.loadNpmTasks('grunt-phonegap');
 	grunt.loadNpmTasks('grunt-contrib');
