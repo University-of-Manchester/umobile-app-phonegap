@@ -23,29 +23,10 @@ config.auth = nconf.get('auth') || 'mock';
 // Supported modes are dev and prod.
 config.mode = nconf.get('mode') || 'dev';
 
-// Server location.
-config.external = nconf.get('external');
-
-//Phonegap platoforms
-config.platforms = nconf.get('platforms') || 'android';
-
-
-//Phonegap plugins.
+// Phonegap plugins
 config.plugins = nconf.get('plugins') || [];
 
-// Performs a test on the current environment configuration.
-// (i.e., ios, android or web).
-config.isEnvironment = function (environment) {
-	'use strict';
-	return (config.environment === environment) ? true : false;
-};
-
-// Performs a test on the current auth configuration
-// (i.e., mock, cas or local).
-config.isAuthConfig = function (auth) {
-	'use strict';
-	return (config.auth === auth) ? true : false;
-};
+config.beautify = nconf.get('beautify') || true;
 
 // Performs a test on the current mode configuration
 // (i.e., dev or prod).
@@ -74,27 +55,33 @@ config.getEnvironment = function () {
 // until the session tracking plugins can be upgraded.
 config.getTracker = function () {
 	'use strict';
-	return (config.environment !== 'web') ? 'SessionTrackerMock' : 'SessionTrackerMock';
+	return (config.getEnvironment() !== 'web') ? 'SessionTracker' : 'SessionTrackerMock';
 };
 
 // Returns the cordova version needed
 // based upon the environment configuration.
 config.getCordova = function () {
 	'use strict';
-	return (config.environment === 'web' || config.environment === 'android') ? 'android' : 'ios';
+	var theEnv = config.getEnvironment();
+	return (theEnv === 'web' || theEnv === 'android') ? 'android' : 'ios';
 };
 
 // Returns the public directory based upon
 // the mode configuration.
 config.getPublicDirectory = function () {
 	'use strict';
-	return (config.mode === 'dev') ? 'src' : 'www';
+	return 'www';
 };
 
-// Returns server path for the webapp location.
-config.getExternal = function () {
-	'use strict';
-	return (config.external) ? config.external : null;
+config.getOptionsForLess = function() {
+    'use strict';
+	var options = {
+		compress: config.isDevelopment() ? false : true,
+		cleancss: config.isDevelopment() ? false : true,
+		report: config.isDevelopment() ? 'min' : 'gzip',
+		optimization: config.isDevelopment() ? 1 : 5,
+	}
+	return options;
 };
 
 // Export module.
