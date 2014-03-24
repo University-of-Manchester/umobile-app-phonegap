@@ -40,8 +40,8 @@ var CAMPUS_MAP = {};
 
 
         var mapBounds = new google.maps.LatLngBounds(
-                new google.maps.LatLng(53.46000847484184, -2.248908910689955),
-                new google.maps.LatLng(53.477890311198905, -2.2179918366590914)
+                new google.maps.LatLng(53.45895002154289, -2.2487240243172812),
+                new google.maps.LatLng(53.477802484563036, -2.2163297412497887)
                 );
 
         var maptiler = new google.maps.ImageMapType({
