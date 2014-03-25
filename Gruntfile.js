@@ -75,6 +75,12 @@ module.exports = function (grunt) {
 						dest: 'www/images/',
 						expand: true,
 						cwd: 'src/images/'
+					},
+                                        {
+						src: ['**'],
+						dest: 'www/js/modules/',
+						expand: true,
+						cwd: 'src/js/modules/'
 					}
 				]
 			}
