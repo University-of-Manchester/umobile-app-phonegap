@@ -9,14 +9,6 @@
                     "iconUrl": "images/icons/feed.png"
             },
             {
-                    "fname": "open-days",
-                    "title": "Open Days",
-                    "url": "https://my.manchester.ac.uk/uPortal/p/open-days/detached",
-                    "description": "Open Days",
-                    "newItemCount": "0",
-                    "iconUrl": "images/icons/feed.png"
-            },
-            {
                     "fname": "emergency",
                     "title": "Emergency",
                     "url": "modules/emergency.html",

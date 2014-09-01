@@ -5,7 +5,9 @@ var config = {};
 // HTML5 testing url: http://localhost:5000
 // Android: http://10.0.2.2:8080
 // iOS: http://localhost:8080
-config.uMobileServerUrl = 'https://my.manchester.ac.uk';
+//config.uMobileServerUrl = 'https://my.manchester.ac.uk';
+config.uMobileServerUrl = 'https://beta.portal.manchester.ac.uk';
+
 
 // UMOBILE SERVER CONTEXT PATH
 config.uMobileServerContext = '/uPortal';
@@ -14,7 +16,7 @@ config.uMobileServerContext = '/uPortal';
 // mockLogin, localLogin or casLogin.
 config.loginFn = 'casLogin';
 config.encryptionKey = 'umobile';
-config.casServerUrl = 'https://login.manchester.ac.uk';
+config.casServerUrl = 'https://beta.login.manchester.ac.uk';
 
 // LOCAL STORAGE.
 config.storageFn = 'local';
@@ -43,5 +45,6 @@ config.nativeModules = {
 	//map: 'modules/map.html',
 	//calendar: 'modules/calendar.html',
 	//courses: 'modules/courses.html'
-        'find-pc': 'modules/findpc.html'
+        'find-pc': 'modules/findpc.html',
+        'contacts': 'modules/contacts.html'
 };

@@ -17,6 +17,6 @@
 		"hogan-express": "0.5.2",
 		"less-middleware": "0.1.15",
 		"phonegap": "3.3.0-0.19.6",
-		"grunt-phonegap": "0.10.1"
+		"grunt-phonegap": "~0.13.3"
 	}
 }

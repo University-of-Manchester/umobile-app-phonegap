@@ -93,21 +93,50 @@ var CAMPUS_MAP = {};
         var external = {
             map: map,
             meMarker: null,
+            watch: null,
             whereami: function() {
-                if (this.meMarker !== null) {
-                    this.meMarker.setMap(null);
-                    this.meMarker = null;
-                }
-                var that = this;
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    map.setCenter(location);
-                    that.meMarker = new google.maps.Marker({
-                        position: location,
-                        map: map,
-                        title: 'You are here'
+                if (this.watch == null) {
+                    console.log("No watch -- watching location --- ");
+                    var that = this;
+                    this.watch = navigator.geolocation.watchPosition(function(position) {
+                        console.log("Got Position -- "+position.coords.latitude +" :: " +position.coords.longitude);
+                        var location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        if (mapBounds.contains(location)) {
+                            console.log("On Campus");
+                            map.setCenter(location);
+                            if (this.meMarker !== null) {
+                                this.meMarker.setMap(null);
+                            }
+                            that.meMarker = new google.maps.Marker({
+                                position: location,
+                                map: map,
+                                title: 'You are here'
+                            });
+                        } else {
+                            console.log("Off Campus");
+                            alert("You do not appear to be on campus at the moment.");
+                        }
+                    }, function(error) {
+                        alert("There was an error getting your location.");
+                        console.warn("ERROR("+error.code+") "+error.message);
+                        navigator.geolocation.clearWatch(this.watch);
+                    },{
+                        enableHighAccuracy: true,
+                        timeout: 30000,
+                        maximumAge: 0,
                     });
-                });
+                } else {
+                    console.log("Watcher being cancelled");
+                    if (this.meMarker !== null) {
+                        this.meMarker.setMap(null);
+                        this.meMarker = null;
+                    }
+                    navigator.geolocation.clearWatch(this.watch);
+                    this.watch = null;
+                }
+            },
+            search: function() {
+                
             }
         }
         
