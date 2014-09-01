@@ -3,7 +3,9 @@
     "environment": "web",
     "platforms": [ "android", "ios"],
     "plugins": [
-        "org.apache.cordova.geolocation"
+        "https://git-wip-us.apache.org/repos/asf/cordova-plugin-geolocation.git",
+        "https://git-wip-us.apache.org/repos/asf/cordova-plugin-dialogs.git",
+        "https://git-wip-us.apache.org/repos/asf/cordova-plugin-vibration.git"
     ],
     "auth": "cas",
     "mode": "dev",
@@ -15,3 +17,4 @@
     },
     "external": "../www"
 }
+

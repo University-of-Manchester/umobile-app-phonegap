@@ -155,7 +155,8 @@ if (config.moduleList.length === 0 || $.inArray(portlet.id, config.moduleList) >
 				if (native[portlet.fname]) {
 					portlet.url = native[portlet.fname];
 					portlet.isNative = true;
-                                        native.splice(portlet.fname, 1); //  remove from the list
+//                                        native.splice(portlet.fname, 1); //  remove from the list
+                                        delete native[portlet.fname];
 				} else {
 					portlet.url = config.uMobileServerUrl + portlet.url;
 					portlet.isNative = false;

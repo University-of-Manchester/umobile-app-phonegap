@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="uk.ac.manchester.umobile" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="uk.ac.manchester.umobile" version="1.0.0">
     <name>My Manchester</name>
     <description>My Manchester application</description>
+    <gap:plugin name="org.apache.cordova.geolocation" />
+    <gap:plugin name="org.apache.cordova.dialogs" />
     <author email="christopher.white@manchester.ac.uk" href="mailto:christopher.white@manchester.ac.uk">Chris White</author>
     <access origin="*"/>
     <access origin="https://*.googleapis.com/*"/>

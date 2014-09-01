@@ -97,6 +97,7 @@ var CAMPUS_MAP = {};
             whereami: function() {
                 if (this.watch == null) {
                     console.log("No watch -- watching location --- ");
+                    var alertBox = null;
                     var that = this;
                     this.watch = navigator.geolocation.watchPosition(function(position) {
                         console.log("Got Position -- "+position.coords.latitude +" :: " +position.coords.longitude);
@@ -104,8 +105,8 @@ var CAMPUS_MAP = {};
                         if (mapBounds.contains(location)) {
                             console.log("On Campus");
                             map.setCenter(location);
-                            if (this.meMarker !== null) {
-                                this.meMarker.setMap(null);
+                            if (that.meMarker !== null) {
+                                that.meMarker.setMap(null);
                             }
                             that.meMarker = new google.maps.Marker({
                                 position: location,
@@ -114,12 +115,11 @@ var CAMPUS_MAP = {};
                             });
                         } else {
                             console.log("Off Campus");
-                            alert("You do not appear to be on campus at the moment.");
+                            navigator.notification.alert("You do not appear to be on campus at the moment", function() { external.whereami() }, "Where am I", "Ok");
                         }
                     }, function(error) {
-                        alert("There was an error getting your location.");
+                        navigator.notification.alert("There was an error getting your location.", function() { external.whereami() }, "Where am I", "Ok");
                         console.warn("ERROR("+error.code+") "+error.message);
-                        navigator.geolocation.clearWatch(this.watch);
                     },{
                         enableHighAccuracy: true,
                         timeout: 30000,
