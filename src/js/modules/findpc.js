@@ -39,7 +39,7 @@
         });
         var listGroup = $("div.list-group");
         $.ajax({
-            url: 'http://130.88.133.38:8080/ClusterAvailability/',
+            url: 'http://130.88.133.38:8080/pc-cluster/',
             dataType: 'JSON'
         }).done(function(data) {
             console.log(data);
