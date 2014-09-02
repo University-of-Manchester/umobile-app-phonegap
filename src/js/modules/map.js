@@ -89,7 +89,7 @@ var CAMPUS_MAP = {};
                 title: location.title
             });
         }
-        
+        var searchMarkers=[];
         var external = {
             map: map,
             meMarker: null,
@@ -136,6 +136,47 @@ var CAMPUS_MAP = {};
                 }
             },
             search: function() {
+                console.log("Search");
+                $.each(searchMarkers, function(index, marker) {
+                    marker.setMap(null);
+                });
+                navigator.notification.prompt("Please enter a search string", function(results) {
+                    var search = results.input1;
+                    console.log ("Searching :: "+ search);
+                    $.ajax("http://systems.library.manchester.ac.uk/blackboard_webservices/maps/search", {
+                        data: {
+                            q: search
+                        },
+                        method: "GET"
+                    }).done(function(xml) {
+                        var bounds = new google.maps.LatLngBounds ();
+                        console.log("GOT XML");
+                        var $locations = $(xml).find("location");
+                        
+                        if ($locations.length > 0) {
+                            $locations.each(function() {
+                                var lat = $("geocode lat", this).text();
+                                var lng = $("geocode lon", this).text();
+                                var title = $("name", this).text();
+                                var location = new google.maps.LatLng(lat, lng);
+                                bounds.extend(location);
+                                searchMarkers.push(
+                                        new google.maps.Marker({
+                                            position: location,
+                                            map: map,
+                                            title: title
+                                        })
+                                );
+                            });
+                            
+                            map.fitBounds(bounds);
+                            
+                        } else {
+                            navigator.notification.alert("No match found", function() { }, "Search", "Ok");
+                        }
+                    });
+                }, "Search", ["Go!"]);
+//                var search = "kilburn";
                 
             }
         }

@@ -62,7 +62,9 @@
                     $(".um-map-whereami").on("click tap", function() {
                         CAMPUS_MAP.whereami();
                     });
-                    
+                    $(".um-map-search").on("click tap", function() {
+                        CAMPUS_MAP.search();
+                    });
                     CAMPUS_MAP.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push($("#controls").get(0));                    
                     
                 });
