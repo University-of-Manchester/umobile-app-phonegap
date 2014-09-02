@@ -6,7 +6,7 @@
                     "url": "modules/findpc.html",
                     "description": "find a pc cluster with free pcs",
                     "newItemCount": "0",
-                    "iconUrl": "images/icons/feed.png"
+                    "iconUrl": "images/icons/computer_lab.png"
             },
             {
                     "fname": "emergency",
@@ -14,7 +14,7 @@
                     "url": "modules/emergency.html",
                     "description": "Emergency Information",
                     "newItemCount": "0",
-                    "iconUrl": "images/icons/feed.png"
+                    "iconUrl": "images/icons/info.png"
             },
             {
                     "fname": "map",
